@@ -1,6 +1,7 @@
 package com.mateuscruzz.investmentapi.services;
 
 import com.mateuscruzz.investmentapi.controllers.CreateUserDTO;
+import com.mateuscruzz.investmentapi.controllers.UpdateUserDTO;
 import com.mateuscruzz.investmentapi.model.User;
 import com.mateuscruzz.investmentapi.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,30 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public void updateUserById(String userId,
+                               UpdateUserDTO updateUserDTO) {
+
+        var id = UUID.fromString(userId);
+        var userEntity =  userRepository.findById(id);
+
+        if (userEntity.isPresent()) {
+            var user = userEntity.get();
+
+            if (updateUserDTO.username() != null) {
+                user.setUsername(updateUserDTO.username());
+            }
+
+            if (updateUserDTO.password() != null) {
+                user.setPassword(updateUserDTO.password());
+            }
+
+            userRepository.save(user);
+        }
+        else {
+            throw new RuntimeException("User not found");
+        }
+    }
+
     public void deleteUserById(String userId) {
         var id = UUID.fromString(userId);
 
@@ -47,6 +72,5 @@ public class UserService {
         if (userExists) {
             userRepository.deleteById(id);
         }
-
     }
 }
