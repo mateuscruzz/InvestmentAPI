@@ -38,4 +38,10 @@ public class UserController {
         List<User> list = userService.getAllUsers();
         return ResponseEntity.ok(list);
     }
+
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<Void> deleteUserById(@PathVariable("userId") String userId) {
+        userService.deleteUserById(userId);
+        return ResponseEntity.noContent().build();
+    }
 }
