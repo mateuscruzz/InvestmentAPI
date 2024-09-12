@@ -140,5 +140,33 @@ class UserServiceTest {
 
     }
 
+    @Nested
+    class getAllUsers {
 
+        @Test
+        @DisplayName("Should get user all users")
+        void shouldGetAllUsers() {
+
+            //Arrange
+            var user = new User(
+                    UUID.randomUUID(),
+                    "username",
+                    "email@email.com",
+                    "password",
+                    Instant.now(),
+                    null
+            );
+            var userList = List.of(user);
+            doReturn(userList).
+                    when(userRepository).
+                    findAll();
+
+            //Act
+            var output = userService.getAllUsers();
+
+            //Assert
+            assertNotNull(output);
+            assertEquals(userList.size(),output.size());
+        }
+    }
 }
