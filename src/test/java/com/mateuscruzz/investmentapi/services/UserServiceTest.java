@@ -1,7 +1,7 @@
 package com.mateuscruzz.investmentapi.services;
 
-import com.mateuscruzz.investmentapi.controllers.CreateUserDTO;
-import com.mateuscruzz.investmentapi.controllers.UpdateUserDTO;
+import com.mateuscruzz.investmentapi.controllers.DTO.CreateUserDTO;
+import com.mateuscruzz.investmentapi.controllers.DTO.UpdateUserDTO;
 import com.mateuscruzz.investmentapi.model.User;
 import com.mateuscruzz.investmentapi.repositories.UserRepository;
 import org.junit.jupiter.api.DisplayName;

@@ -1,4 +1,4 @@
-package com.mateuscruzz.investmentapi.controllers;
+package com.mateuscruzz.investmentapi.controllers.DTO;
 
 public record CreateUserDTO(
         String username,

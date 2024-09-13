@@ -20,16 +20,16 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID accountId;
 
-    @Column(name = "description")
-    private String description;
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToOne(mappedBy = "account")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "account")
     @PrimaryKeyJoinColumn
     private BillingAdress billingAdress;
+
+    @Column(name = "description")
+    private String description;
 
     @OneToMany(mappedBy = "account")
     private List<AccountStock> accountStocks;
