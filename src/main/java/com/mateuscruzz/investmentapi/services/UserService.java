@@ -59,9 +59,6 @@ public class UserService {
 
             userRepository.save(user);
         }
-        else {
-            throw new RuntimeException("User not found");
-        }
     }
 
     public void deleteUserById(String userId) {
