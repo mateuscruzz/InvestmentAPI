@@ -18,4 +18,6 @@ public class Stock {
 
     @Column(name = "description")
     private String description;
+
+
 }
