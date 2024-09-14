@@ -1,8 +1,10 @@
 package com.mateuscruzz.investmentapi.controllers;
 
+import com.mateuscruzz.investmentapi.controllers.DTO.AccountResponseDTO;
 import com.mateuscruzz.investmentapi.controllers.DTO.CreateAccountDTO;
 import com.mateuscruzz.investmentapi.controllers.DTO.CreateUserDTO;
 import com.mateuscruzz.investmentapi.controllers.DTO.UpdateUserDTO;
+import com.mateuscruzz.investmentapi.model.Account;
 import com.mateuscruzz.investmentapi.model.User;
 import com.mateuscruzz.investmentapi.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,5 +62,12 @@ public class UserController {
         userService.createAccount(userId, createAccountDTO);
 
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/{userId}/accounts")
+    public ResponseEntity<List<AccountResponseDTO>> listUserAccounts(@PathVariable("userId") String userId){
+        var accounts = userService.listAccounts(userId);
+
+        return ResponseEntity.ok(accounts);
     }
 }

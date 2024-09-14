@@ -1,5 +1,6 @@
 package com.mateuscruzz.investmentapi.services;
 
+import com.mateuscruzz.investmentapi.controllers.DTO.AccountResponseDTO;
 import com.mateuscruzz.investmentapi.controllers.DTO.CreateAccountDTO;
 import com.mateuscruzz.investmentapi.controllers.DTO.CreateUserDTO;
 import com.mateuscruzz.investmentapi.controllers.DTO.UpdateUserDTO;
@@ -109,5 +110,16 @@ public class UserService {
 
         billingAdressRepository.save(billingAdress);
 
+    }
+
+    public List<AccountResponseDTO> listAccounts(String userId) {
+        var user = userRepository.findById(UUID.fromString(userId))
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        return user.getAccounts()
+                .stream()
+                .map(ac -> new AccountResponseDTO(ac.getAccountId().toString(),
+                        ac.getDescription()))
+                .toList();
     }
 }
